@@ -16,6 +16,31 @@ docker-compose up -d
 
 Antes de validar a aplicação, será necessário criar o usuário do banco, vá até o item 6 do tutorial e siga as instruções.
 
+1. Login no container mongodb
+
+```bash
+$ docker exec -it mongodb bash
+```
+
+2. Login no mongo, use a senha criada para o ```MONGO_INITDB_ROOT_PASSWORD```
+
+```bash
+# mongo -u mongodbuser -p
+```
+
+3. Crie o banco flaskdb
+
+```bash
+mongodb > use flaskdb
+```
+
+4. Crie o usuário do flask com permissões de leitura e escrita no banco _flaskdb_
+
+```
+mongodb > db.createUser({user: 'flaskuser', pwd: 'your password', roles: [{role: 'readWrite', db: 'flaskdb'}]})
+exit
+```
+
 ## Testes
 
 ```
